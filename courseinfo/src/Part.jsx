@@ -4,7 +4,7 @@ function Part(props){
     return(
         <>
         <p>
-        {props.part.name} {props.part.exercises}</p>
+        {props.course.name} {props.course.exercises}</p>
         </>
     )
 }

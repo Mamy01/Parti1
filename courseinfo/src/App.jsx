@@ -1,33 +1,30 @@
-import Header from "./Header.jsx"
-import Content from "./Content.jsx"
-import Total from "./Total.jsx"
+import { useState } from "react"
 
+function App(){
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
-const App = () => {
-   const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
+  const handleGood =() =>{
+    setGood(good + 1)
+  }
+  const handleNeutre =() =>{
+    setNeutral(neutral +1)
+  }
+  const handleBad =() =>{
+    setBad(bad + 1)
   }
 
   return(
-    <>
-      <Header course={course}/>
-      <Content course={course}/>
-      <Total course={course}/>
-    </>
+    <div>
+      <h1>Give fwwtback</h1>
+      <button onClick={handleGood}>Good</button>
+      <button onClick={handleNeutre}>Neutre</button>
+      <button onClick={handleBad}>Bad</button>
+      <p>Good: {good}</p>
+      <p>Neutre: {neutral}</p>
+      <p>Bad: {bad}</p>
+    </div>
   )
 }
 

@@ -1,5 +1,8 @@
 
 function Statistics(props) {
+    if(props.good === 0 && props.neutral === 0 && props.bad === 0){
+       return "No feedback giving"
+    }
 
     return (
         <>

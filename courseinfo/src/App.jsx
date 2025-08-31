@@ -19,7 +19,7 @@ function App(){
 
   return(
     <div>
-      <h1>Give fwwtback</h1>
+      <h1>Give feedback</h1>
       <button onClick={handleGood}>Good</button>
       <button onClick={handleNeutre}>Neutre</button>
       <button onClick={handleBad}>Bad</button>

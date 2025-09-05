@@ -3,9 +3,12 @@ import Statistics from "./Statistics"
 import Button from "./Button"
 
 function App() {
+  // Feedback part
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+
+  // Anecdotes part
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
@@ -14,22 +17,54 @@ function App() {
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.'
-  ]
+  ];
+
   const [selected, setSelected] = useState(0);
-  function voyage(){
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+
+  // Random anecdote
+  function voyage() {
     const randomIndex = Math.floor(Math.random() * anecdotes.length);
-  setSelected(randomIndex);
+    setSelected(randomIndex);
   }
+
+  // Vote for current anecdote
+  function vote() {
+    const copy = [...votes];
+    copy[selected] += 1;
+    setVotes(copy);
+  }
+
+  // Anecdote with most votes
+  const maxVotes = Math.max(...votes);
+  const bestIndex = votes.indexOf(maxVotes);
 
   return (
     <div>
+      {/* Feedback Section */}
       <h1>Give feedback</h1>
       <Button onClick={() => setGood(good + 1)} text="Good" />
       <Button onClick={() => setNeutral(neutral + 1)} text="Neutral" />
       <Button onClick={() => setBad(bad + 1)} text="Bad" />
       <Statistics good={good} neutral={neutral} bad={bad} />
-      <button onClick={voyage}>Anecdotes</button>
+
+      {/* Anecdotes Section */}
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
+      <p>Has {votes[selected]} votes</p>
+      <button onClick={vote}>Vote</button>
+      <button onClick={voyage}>Next anecdote</button>
+
+      {/* Anecdote with most votes */}
+      <h1>Anecdote with most votes</h1>
+      {maxVotes > 0 ? (
+        <>
+          <p>{anecdotes[bestIndex]}</p>
+          <p>Has {maxVotes} votes</p>
+        </>
+      ) : (
+        <p>No votes yet</p>
+      )}
     </div>
   )
 }
